@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Clock from './clock';
+import DateForm from './date-form';
 
 export default class App extends Component {
   render() {
@@ -7,7 +7,7 @@ export default class App extends Component {
       <div>
         <h1>Birthday Countdown</h1>
 
-        <Clock />
+        <DateForm />
       </div>
     );
   }
