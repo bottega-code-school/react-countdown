@@ -4,8 +4,8 @@ import moment from 'moment';
 import Clock from './clock';
 
 export default class Countdown extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       startDate: moment(),
@@ -30,7 +30,8 @@ export default class Countdown extends Component {
   // Show async nature of state and that it does not always update
   // immediately
   componentDidUpdate() {
-    console.log(this.state.completedForm);
+    //console.log(this.state.completedForm);
+    //console.log(this.state.startDate);
   }
 
   render() {
@@ -38,7 +39,7 @@ export default class Countdown extends Component {
       <div>
         <h1>Enter a birthday</h1>
 
-        <form onSubmit={this.handleSubmit} id="countdownForm">
+        <form onSubmit={this.handleSubmit} id="countdownForm" className={ this.state.completedForm ? 'hideContent' : 'showContent' }>
           <DatePicker
               selected={this.state.startDate}
               onChange={this.handleChange}

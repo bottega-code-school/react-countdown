@@ -4,4 +4,6 @@
 
 .hideContent {
   visibility: hidden;
+  position: absolute;
 }
+

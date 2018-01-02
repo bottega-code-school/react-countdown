@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 export default class Clock extends Component {
   constructor() {
     super();
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
-    this.birthday = '2018-07-31';
-
+    this.birthday = moment().toString();
     this.state = { timeRemaining: {} };
-
-    this.startTimer()
   }
 
   getTimeRemaining(birthday){
@@ -27,11 +25,16 @@ export default class Clock extends Component {
     };
   }
 
-  // Do this afterwards to fix delay
+  // Keep in and then remove when switch to form occurs
   // https://reactjs.org/docs/react-component.html#componentdidmount
-  componentDidMount() {
-    const timeLeft = this.getTimeRemaining(this.birthday);
+  componentWillMount() {
+    const submittedDate = this.props.dateFormData.startDate.toString();
+    const timeLeft = this.getTimeRemaining(submittedDate);
     this.setState({ timeRemaining: timeLeft });
+  }
+
+  componentDidUpdate() {
+    console.log(this.birthday);
   }
 
   startTimer() {
@@ -45,15 +48,20 @@ export default class Clock extends Component {
   render() {
     const dateFormData = this.props.dateFormData;
     const data = this.state.timeRemaining;
+    this.birthday = dateFormData.startDate.toString();
+    this.startTimer();
 
     return(
       <div className={ dateFormData.completedForm ? 'showContent' : 'hideContent' } >
-        <h2>Countdown to: {this.birthday}</h2>
 
         <p>Days: {data.days}</p>
         <p>Hours: {data.hours}</p>
         <p>Minutes: {data.minutes}</p>
         <p>Seconds: {data.seconds}</p>
+
+        <h4>until</h4>
+
+        <h3>{dateFormData.startDate.toString()}</h3>
       </div>
     );
   }
