@@ -43,10 +43,11 @@ export default class Clock extends Component {
   }
 
   render() {
+    const dateFormData = this.props.dateFormData;
     const data = this.state.timeRemaining;
 
     return(
-      <div>
+      <div className={ dateFormData.completedForm ? 'showContent' : 'hideContent' } >
         <h2>Countdown to: {this.birthday}</h2>
 
         <p>Days: {data.days}</p>
